@@ -3933,7 +3933,7 @@ flatpak_context_export (FlatpakContext *context,
     {
       g_autoptr(GFile) apps_dir = g_file_get_parent (app_id_dir);
       int i;
-      /* Hide the .var/app dir by default (unless explicitly made visible) */
+      /* Hide the Local/share/flatpak dir by default (unless explicitly made visible) */
       if (!flatpak_exports_add_path_tmpfs (exports,
                                            flatpak_file_get_path_cached (apps_dir),
                                            &local_error))
@@ -3988,7 +3988,7 @@ GFile *
 flatpak_get_data_dir (const char *app_id)
 {
   g_autoptr(GFile) home = g_file_new_for_path (g_get_home_dir ());
-  g_autoptr(GFile) var_app = g_file_resolve_relative_path (home, ".var/app");
+  g_autoptr(GFile) var_app = g_file_resolve_relative_path (home, "Local/share/flatpak");
 
   return g_file_get_child (var_app, app_id);
 }
@@ -4206,7 +4206,7 @@ flatpak_context_append_bwrap_filesystem (FlatpakContext  *context,
       while (g_hash_table_iter_next (&iter, &key, NULL))
         {
           const char *persist = key;
-          g_autofree char *appdir = g_build_filename (g_get_home_dir (), ".var/app", app_id, NULL);
+          g_autofree char *appdir = g_build_filename (g_get_home_dir (), "Local/share/flatpak", app_id, NULL);
           g_autofree char *dest = g_build_filename (g_get_home_dir (), persist, NULL);
           g_autoptr(GError) local_error = NULL;
 

@@ -1378,7 +1378,7 @@ flatpak_run_add_dconf_args (FlatpakBwrap *bwrap,
       g_autofree char *filename = NULL;
 
       filename = g_build_filename (g_get_home_dir (),
-                                   ".var/app", app_id,
+                                   "Local/share/flatpak", app_id,
                                    "config/glib-2.0/settings/keyfile",
                                    NULL);
 

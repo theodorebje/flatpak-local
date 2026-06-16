@@ -470,10 +470,10 @@ ${FLATPAK} remote-add ${U} --gpg-import=${FL_GPG_HOMEDIR}/pubring.gpg test-rebas
 
 ${FLATPAK} ${U} install -y test-rebase org.test.Hello >&2
 
-assert_not_has_dir $HOME/.var/app/org.test.Hello
+assert_not_has_dir $HOME/Local/share/flatpak/org.test.Hello
 ${FLATPAK} run --command=bash org.test.Hello -c 'echo foo > $XDG_DATA_HOME/a-file' >&2
-assert_has_dir $HOME/.var/app/org.test.Hello
-assert_has_file $HOME/.var/app/org.test.Hello/data/a-file
+assert_has_dir $HOME/Local/share/flatpak/org.test.Hello
+assert_has_file $HOME/Local/share/flatpak/org.test.Hello/data/a-file
 
 ${FLATPAK} build-commit-from --no-update-summary --end-of-life-rebase=org.test.Hello=org.test.NewHello --src-repo=repos/test ${FL_GPGARGS} repos/test-rebase app/org.test.Hello/$ARCH/master runtime/org.test.Hello.Locale/$ARCH/master >&2
 GPGARGS="${FL_GPGARGS}" $(dirname $0)/make-test-app.sh repos/test-rebase org.test.NewHello master "${REBASE_COLLECTION_ID}" "NEW" > /dev/null
@@ -503,9 +503,9 @@ fi
 # Now do a --no-deploy update and check the old version is still installed
 ${FLATPAK} ${U} update -y --no-deploy org.test.Hello >&2
 
-assert_has_dir $HOME/.var/app/org.test.Hello
-assert_has_file $HOME/.var/app/org.test.Hello/data/a-file
-assert_not_has_dir $HOME/.var/app/org.test.NewHello
+assert_has_dir $HOME/Local/share/flatpak/org.test.Hello
+assert_has_file $HOME/Local/share/flatpak/org.test.Hello/data/a-file
+assert_not_has_dir $HOME/Local/share/flatpak/org.test.NewHello
 
 # Finally actually do the update.
 ${FLATPAK} ${U} update -y org.test.Hello >&2
@@ -517,22 +517,22 @@ assert_not_has_file $FL_DIR/app/org.test.NewHello/$ARCH/master/active/files
 ${FLATPAK} run --command=bash org.test.NewHello -c 'echo foo > $XDG_DATA_HOME/another-file' >&2
 
 # Ensure we migrated the app data
-assert_has_dir $HOME/.var/app/org.test.NewHello
-assert_has_file $HOME/.var/app/org.test.NewHello/data/a-file
-assert_has_file $HOME/.var/app/org.test.NewHello/data/another-file
+assert_has_dir $HOME/Local/share/flatpak/org.test.NewHello
+assert_has_file $HOME/Local/share/flatpak/org.test.NewHello/data/a-file
+assert_has_file $HOME/Local/share/flatpak/org.test.NewHello/data/another-file
 
 # And that the old is symlinked
-assert_has_symlink $HOME/.var/app/org.test.Hello
-assert_has_file $HOME/.var/app/org.test.Hello/data/a-file
-assert_has_file $HOME/.var/app/org.test.Hello/data/another-file
+assert_has_symlink $HOME/Local/share/flatpak/org.test.Hello
+assert_has_file $HOME/Local/share/flatpak/org.test.Hello/data/a-file
+assert_has_file $HOME/Local/share/flatpak/org.test.Hello/data/another-file
 
 # Simulate removal of app data dir
-rm -rf $HOME/.var/app/org.test.NewHello
+rm -rf $HOME/Local/share/flatpak/org.test.NewHello
 
 ${FLATPAK} run org.test.NewHello >&2
 
 # Ensure the data dir is re-created instead of migrating the symlink
-assert_has_dir $HOME/.var/app/org.test.NewHello
+assert_has_dir $HOME/Local/share/flatpak/org.test.NewHello
 
 ${FLATPAK} ${U} uninstall -y org.test.NewHello org.test.Platform >&2
 

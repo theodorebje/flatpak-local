@@ -255,7 +255,7 @@
                 <term><option>--with-appdir</option></term>
 
                 <listitem><para>
-                  Expose and configure access to the per-app storage directory in <filename>$HOME/.var/app</filename>. This is
+                  Expose and configure access to the per-app storage directory in <filename>$HOME/Local/share/flatpak</filename>. This is
                   not normally useful when building, but helps when testing built apps.
                 </para></listitem>
             </varlistentry>

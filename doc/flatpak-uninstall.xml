@@ -68,7 +68,7 @@
         </para>
         <para>
             When <option>--delete-data</option> is specified while removing an app, its
-            data directory in <filename>~/.var/app</filename> and any permissions it might
+            data directory in <filename>~/Local/share/flatpak</filename> and any permissions it might
             have are removed. When <option>--delete-data</option> is used without a
             <arg choice="plain">REF</arg>, all 'unowned' app data is removed.
         </para>
@@ -208,7 +208,7 @@
             <varlistentry>
                 <term><option>--delete-data</option></term>
                 <listitem><para>
-                    Remove app data in <filename>~/.var/app</filename> and in
+                    Remove app data in <filename>~/Local/share/flatpak</filename> and in
                     the permission store.
                 </para></listitem>
             </varlistentry>

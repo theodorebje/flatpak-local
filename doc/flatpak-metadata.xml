@@ -625,7 +625,7 @@ sockets=!x11;x11;if:x11:!has-wayland;
                       allowing the locations to be used for persistent data when
                       the application does not have access to the real homedir.
                       For instance making ".myapp" persistent would make "~/.myapp"
-                      in the sandbox a bind mount to "~/.var/app/org.my.App/.myapp",
+                      in the sandbox a bind mount to "~/Local/share/flatpak/org.my.App/.myapp",
                       thus allowing an unmodified application to save data in
                       the per-application location. Available since 0.3.
                     </para></listitem>
@@ -728,7 +728,7 @@ sockets=!x11;x11;if:x11:!has-wayland;
                     <term><option>instance-path</option> (string)</term>
                     <listitem><para>
                         The absolute path on the host system of the app's
-                        persistent storage area in <filename>$HOME/.var</filename>.
+                        persistent storage area in <filename>$HOME/Local/share/flatpak</filename>.
                     </para></listitem>
                 </varlistentry>
                 <varlistentry>

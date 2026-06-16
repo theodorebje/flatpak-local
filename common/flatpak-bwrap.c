@@ -291,7 +291,7 @@ flatpak_bwrap_add_args_data (FlatpakBwrap *bwrap,
 /* This resolves the target here rather than in bwrap, because it may
  * not resolve in bwrap setup due to absolute symlinks conflicting
  * with /newroot root. For example, dest could be inside
- * ~/.var/app/XXX where XXX is an absolute symlink.  However, in the
+ * ~/Local/share/flatpak/XXX where XXX is an absolute symlink.  However, in the
  * usecases here the destination file often doesn't exist, so we
  * only resolve the directory part.
  */

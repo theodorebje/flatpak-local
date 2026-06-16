@@ -134,7 +134,7 @@ flatpak_delete_data (gboolean    yes_opt,
                      const char *app_id,
                      GError    **error)
 {
-  g_autofree char *path = g_build_filename (g_get_home_dir (), ".var", "app", app_id, NULL);
+  g_autofree char *path = g_build_filename (g_get_home_dir (), "Local/share/flatpak", app_id, NULL);
   g_autoptr(GFile) file = g_file_new_for_path (path);
 
   if (!yes_opt &&
@@ -559,7 +559,7 @@ flatpak_builtin_uninstall (int argc, char **argv, GCancellable *cancellable, GEr
   if (opt_delete_data && argc < 2)
     {
       g_autoptr(GFileEnumerator) enumerator = NULL;
-      g_autofree char *path = g_build_filename (g_get_home_dir (), ".var", "app", NULL);
+      g_autofree char *path = g_build_filename (g_get_home_dir (), "Local/share/flatpak", NULL);
       g_autoptr(GFile) app_dir = g_file_new_for_path (path);
       gboolean found_data_to_delete = FALSE;
 

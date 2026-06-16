@@ -3447,7 +3447,7 @@ now been reverted as it introduced other problems for flatpak.
  * Updating an app by installing a newer bundle now works
    again.
  * Make /var/tmp not be on a tmpfs (it is now in
-   ~/.var/app/$appid/cache/tmp).
+   ~/Local/share/flatpak/$appid/cache/tmp).
  * Documentation / translation updates
 
 Major changes in 0.8.0
@@ -3506,7 +3506,7 @@ Major changes in 0.6.14
  * Using --filesystem=$dir when $dir is a symlink-to-directory now works.
  * Using --filesystem=$file to expose unix sockets to the app is now
    allowed.
- * By default all the directories in ~/.var/app (except the app), as
+ * By default all the directories in ~/Local/share/flatpak (except the app), as
    well as ~/.local/share/flatpak are hidden in the sandbox.
  * New option --filesystem=$dir:create which will create the destination
    if it did not previously exist.

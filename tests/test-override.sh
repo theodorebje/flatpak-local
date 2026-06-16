@@ -380,7 +380,7 @@ reset_overrides
 if ! skip_one_without_bwrap "persist"; then
   ${FLATPAK} override --user --persist=example org.test.Hello
   ${FLATPAK} run --command=sh org.test.Hello -c "echo goodbye > $HOME/example/bye"
-  assert_file_has_content $HOME/.var/app/org.test.Hello/example/bye goodbye
+  assert_file_has_content $HOME/Local/share/flatpak/org.test.Hello/example/bye goodbye
 
   ok "persist"
 fi

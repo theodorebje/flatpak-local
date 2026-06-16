@@ -114,8 +114,8 @@ ok "XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR not inherited"
 assert_streq "$XDG_CACHE_HOME" "${TEST_DATA_DIR}/home/cache"
 run_sh org.test.Hello 'echo "$XDG_CACHE_HOME"' > value-in-sandbox
 head value-in-sandbox >&2
-assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/\\.var/app/org\\.test\\.Hello/cache\$"
-test -d "${TEST_DATA_DIR}/home/.var/app/org.test.Hello/cache"
+assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/Local/share/flatpak/org\\.test\\.Hello/cache\$"
+test -d "${TEST_DATA_DIR}/home/Local/share/flatpak/org.test.Hello/cache"
 run_sh org.test.Hello 'echo "$HOST_XDG_CACHE_HOME"' > host-value-in-sandbox
 head host-value-in-sandbox >&2
 assert_file_has_content host-value-in-sandbox "^${TEST_DATA_DIR}/home/cache\$"
@@ -123,8 +123,8 @@ assert_file_has_content host-value-in-sandbox "^${TEST_DATA_DIR}/home/cache\$"
 assert_streq "$XDG_CONFIG_HOME" "${TEST_DATA_DIR}/home/config"
 run_sh org.test.Hello 'echo "$XDG_CONFIG_HOME"' > value-in-sandbox
 head value-in-sandbox >&2
-assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/\\.var/app/org\\.test\\.Hello/config\$"
-test -d "${TEST_DATA_DIR}/home/.var/app/org.test.Hello/config"
+assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/Local/share/flatpak/org\\.test\\.Hello/config\$"
+test -d "${TEST_DATA_DIR}/home/Local/share/flatpak/org.test.Hello/config"
 run_sh org.test.Hello 'echo "$HOST_XDG_CONFIG_HOME"' > host-value-in-sandbox
 head host-value-in-sandbox >&2
 assert_file_has_content host-value-in-sandbox "^${TEST_DATA_DIR}/home/config\$"
@@ -132,8 +132,8 @@ assert_file_has_content host-value-in-sandbox "^${TEST_DATA_DIR}/home/config\$"
 assert_streq "$XDG_DATA_HOME" "${TEST_DATA_DIR}/home/share"
 run_sh org.test.Hello 'echo "$XDG_DATA_HOME"' > value-in-sandbox
 head value-in-sandbox >&2
-assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/\\.var/app/org\\.test\\.Hello/data\$"
-test -d "${TEST_DATA_DIR}/home/.var/app/org.test.Hello/data"
+assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/Local/share/flatpak/org\\.test\\.Hello/data\$"
+test -d "${TEST_DATA_DIR}/home/Local/share/flatpak/org.test.Hello/data"
 run_sh org.test.Hello 'echo "$HOST_XDG_DATA_HOME"' > host-value-in-sandbox
 head host-value-in-sandbox >&2
 assert_file_has_content host-value-in-sandbox "^${TEST_DATA_DIR}/home/share\$"
@@ -141,8 +141,8 @@ assert_file_has_content host-value-in-sandbox "^${TEST_DATA_DIR}/home/share\$"
 assert_streq "$XDG_STATE_HOME" "${TEST_DATA_DIR}/home/state"
 run_sh org.test.Hello 'echo "$XDG_STATE_HOME"' > value-in-sandbox
 head value-in-sandbox >&2
-assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/\\.var/app/org\\.test\\.Hello/\\.local/state\$"
-test -d "${TEST_DATA_DIR}/home/.var/app/org.test.Hello/.local/state"
+assert_file_has_content value-in-sandbox "^${TEST_DATA_DIR}/home/Local/share/flatpak/org\\.test\\.Hello/\\.local/state\$"
+test -d "${TEST_DATA_DIR}/home/Local/share/flatpak/org.test.Hello/.local/state"
 run_sh org.test.Hello 'echo "$HOST_XDG_STATE_HOME"' > host-value-in-sandbox
 head host-value-in-sandbox >&2
 assert_file_has_content host-value-in-sandbox "^${TEST_DATA_DIR}/home/state\$"
@@ -570,36 +570,36 @@ assert_file_has_content out "^sdk=org\.test\.Sdk/$(flatpak --default-arch)/stabl
 
 ok "--sdk option"
 
-rm -fr "$HOME/.var/app/org.test.Hello"
-mkdir -p "$HOME/.var/app/org.test.Hello"
+rm -fr "$HOME/Local/share/flatpak/org.test.Hello"
+mkdir -p "$HOME/Local/share/flatpak/org.test.Hello"
 run --command=sh --persist=.persist org.test.Hello -c 'echo can-persist > .persist/rc'
-sed -e 's,^,#--persist=.persist# ,g' < "$HOME/.var/app/org.test.Hello/.persist/rc" >&2
-assert_file_has_content "$HOME/.var/app/org.test.Hello/.persist/rc" "can-persist"
+sed -e 's,^,#--persist=.persist# ,g' < "$HOME/Local/share/flatpak/org.test.Hello/.persist/rc" >&2
+assert_file_has_content "$HOME/Local/share/flatpak/org.test.Hello/.persist/rc" "can-persist"
 
 ok "--persist=.persist persists a directory"
 
-rm -fr "$HOME/.var/app/org.test.Hello"
-mkdir -p "$HOME/.var/app/org.test.Hello"
+rm -fr "$HOME/Local/share/flatpak/org.test.Hello"
+mkdir -p "$HOME/Local/share/flatpak/org.test.Hello"
 # G_DEBUG='' to avoid the deprecation warning being fatal
 G_DEBUG='' run --command=sh --persist=/.persist org.test.Hello -c 'echo can-persist > .persist/rc'
-sed -e 's,^,#--persist=/.persist# ,g' < "$HOME/.var/app/org.test.Hello/.persist/rc" >&2
-assert_file_has_content "$HOME/.var/app/org.test.Hello/.persist/rc" "can-persist"
+sed -e 's,^,#--persist=/.persist# ,g' < "$HOME/Local/share/flatpak/org.test.Hello/.persist/rc" >&2
+assert_file_has_content "$HOME/Local/share/flatpak/org.test.Hello/.persist/rc" "can-persist"
 
 ok "--persist=/.persist is a deprecated form of --persist=.persist"
 
-rm -fr "$HOME/.var/app/org.test.Hello"
-mkdir -p "$HOME/.var/app/org.test.Hello"
+rm -fr "$HOME/Local/share/flatpak/org.test.Hello"
+mkdir -p "$HOME/Local/share/flatpak/org.test.Hello"
 run --command=sh --persist=. org.test.Hello -c 'echo can-persist > .persistrc'
-sed -e 's,^,#--persist=.# ,g' < "$HOME/.var/app/org.test.Hello/.persistrc" >&2
-assert_file_has_content "$HOME/.var/app/org.test.Hello/.persistrc" "can-persist"
+sed -e 's,^,#--persist=.# ,g' < "$HOME/Local/share/flatpak/org.test.Hello/.persistrc" >&2
+assert_file_has_content "$HOME/Local/share/flatpak/org.test.Hello/.persistrc" "can-persist"
 
 ok "--persist=. persists all files"
 
 mkdir "${TEST_DATA_DIR}/inaccessible"
 echo FOO > ${TEST_DATA_DIR}/inaccessible/secret-file
-rm -fr "$HOME/.var/app/org.test.Hello"
-mkdir -p "$HOME/.var/app/org.test.Hello"
-ln -fns "${TEST_DATA_DIR}/inaccessible" "$HOME/.var/app/org.test.Hello/persist"
+rm -fr "$HOME/Local/share/flatpak/org.test.Hello"
+mkdir -p "$HOME/Local/share/flatpak/org.test.Hello"
+ln -fns "${TEST_DATA_DIR}/inaccessible" "$HOME/Local/share/flatpak/org.test.Hello/persist"
 # G_DEBUG='' to avoid the warnings being fatal when we reject a --persist option.
 # LC_ALL=C so we get the expected non-localized string.
 LC_ALL=C G_DEBUG='' run --command=ls --persist=persist --persist=relative/../escape org.test.Hello -la ~/persist &> hello_out || true

@@ -166,7 +166,7 @@
                or subdirectories are not allowed.
              </para><para>
                The files must be in the <filename>sandbox</filename> subdirectory of
-               the instance directory (i.e. <filename>~/.var/app/$APP_ID/sandbox</filename>).
+               the instance directory (i.e. <filename>~/Local/share/flatpak/$APP_ID/sandbox</filename>).
              </para></listitem>
            </varlistentry>
            <varlistentry>
@@ -177,7 +177,7 @@
                are not allowed.
              </para><para>
                The files must be in the <filename>sandbox</filename> subdirectory of
-               the instance directory (i.e. <filename>~/.var/app/$APP_ID/sandbox</filename>).
+               the instance directory (i.e. <filename>~/Local/share/flatpak/$APP_ID/sandbox</filename>).
              </para></listitem>
            </varlistentry>
            <varlistentry>
